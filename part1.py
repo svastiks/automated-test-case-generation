@@ -1,52 +1,37 @@
-# from openai import OpenAI
-# client = OpenAI()
-
-# completion = client.chat.completions.create(
-#     model="gpt-4o",
-#     messages=[
-#         {
-#             "role": "user",
-#             "content": "Hey, help me analyze some test cases for the code I'm writing."
-#         }
-#     ]
-# )
-
-# print(completion.choices[0].message.content)
-
 import os
-import re
 
-def extract_evosuite_test_cases(evosuite_dir, output_file):
+def copy_java_to_txt(evosuite_dir, output_file):
     """
-    Extracts test cases from EVOSuite-generated Java files and writes them to a .txt file.
+    Reads all .java files from the given directory and writes their contents 
+    into a single .txt file.
     
     Args:
-        evosuite_dir (str): Path to the directory containing EVOSuite-generated test files.
+        evosuite_dir (str): Path to the directory containing .java files.
         output_file (str): Path to the output .txt file.
     """
-    test_cases = []
+    with open(output_file, "w", encoding="utf-8") as out_f:
+        # Iterate through all files in the provided directory
+        for root, _, files in os.walk(evosuite_dir):
+            for file in files:
+                if file.endswith(".java"):
+                    java_path = os.path.join(root, file)
+                    try:
+                        with open(java_path, "r", encoding="utf-8") as in_f:
+                            content = in_f.read()
+                            # Optionally add a header comment for each file
+                            out_f.write(f"// File: {file}\n")
+                            out_f.write(content + "\n\n")
+                        print(f"Copied: {java_path}")
+                    except Exception as e:
+                        print(f"Error reading {java_path}: {e}")
+    print(f"All .java files have been copied to {output_file}")
 
-    # Iterate through all Java files in the EVOSuite directory
-    for root, _, files in os.walk(evosuite_dir):
-        for file in files:
-            if file.endswith(".java"):
-                file_path = os.path.join(root, file)
-                with open(file_path, "r") as f:
-                    content = f.read()
-                    # Extract test methods using regex
-                    methods = re.findall(r"public void (test\w+)\(\) \{.*?\}", content, re.DOTALL)
-                    for method in methods:
-                        test_cases.append(method)
+if __name__ == "__main__":
+    # Hardcoded path to the folder containing .java files
+    evosuite_dir = "/Users/svastik/Documents/Svastik/Courses/WINTER 2025/EECS 4313/project/Money-Maven/Money-Maven/src/test/java/maven"  # Replace this with your folder path
 
-    # Write the extracted test cases to the output file
-    with open(output_file, "w") as f:
-        for test_case in test_cases:
-            f.write(test_case + "\n")
+    # Determine the desktop path and set the output file path
+    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+    output_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")
 
-    print(f"Extracted {len(test_cases)} test cases to {output_file}")
-
-
-# Example usage
-evosuite_dir = "path/to/evosuite/generated/tests"
-output_file = "evosuite_test_cases.txt"
-extract_evosuite_test_cases(evosuite_dir, output_file)
+    copy_java_to_txt(evosuite_dir, output_file)
