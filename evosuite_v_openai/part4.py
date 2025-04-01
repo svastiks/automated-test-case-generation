@@ -129,13 +129,15 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
 
     print(f"Final report written to {output_report_md}")
 
-
 # Example usage
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-evosuite_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")  # EVOSuite test cases file
-openai_file = os.path.join(desktop_path, "openai_test_cases.txt")  # OpenAI test cases file
-report_file = os.path.join(desktop_path, "comparison_report.md")  # Comparison report file (.md)
-output_java_file = os.path.join(desktop_path, "Money_ESTest.java")  # Output .java file
-output_report_md = os.path.join(desktop_path, "FinalReport.md")  # Output .md file for the final report
+output_dir = os.path.join(desktop_path, "evosuite_vs_open_ai")
+os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
+
+evosuite_file = os.path.join(output_dir, "evo_suite_test_cases.txt")  # EVOSuite test cases file
+openai_file = os.path.join(output_dir, "openai_test_cases.txt")  # OpenAI test cases file
+report_file = os.path.join(output_dir, "comparison_report.md")  # Comparison report file (.md)
+output_java_file = os.path.join(output_dir, "Money_ESTest.java")  # Output .java file
+output_report_md = os.path.join(output_dir, "FinalReport.md")  # Output .md file for the final report
 
 generate_improved_test_cases_and_report(evosuite_file, openai_file, report_file, output_java_file, output_report_md)

@@ -30,8 +30,13 @@ if __name__ == "__main__":
     # Hardcoded path to the folder containing .java files
     evosuite_dir = "/Users/svastik/Documents/Svastik/Courses/WINTER 2025/EECS 4313/project/Money-Maven/Money-Maven/src/test/java/maven"  # Replace this with your folder path
 
-    # Determine the desktop path and set the output file path
+    # Determine the desktop path and set the output directory
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-    output_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")
+    output_dir = os.path.join(desktop_path, "evosuite_vs_open_ai")
+    os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
+
+    # Set the output file path
+    output_file = os.path.join(output_dir, "evo_suite_test_cases.txt")
 
     copy_java_to_txt(evosuite_dir, output_file)
+

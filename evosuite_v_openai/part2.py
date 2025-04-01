@@ -38,14 +38,15 @@ def generate_test_cases_with_openai(java_class_file, output_file):
 
     print(f"Generated test cases written to {output_file}")
 
-
 # Example usage
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+output_dir = os.path.join(desktop_path, "evosuite_vs_open_ai")
+os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
 
 # Hardcoded path to the Java class file
 java_class_file = "/Users/svastik/Documents/Svastik/Courses/WINTER 2025/EECS 4313/project/Money-Maven/Money-Maven/src/main/java/maven/Money.java"  # Replace this with the actual path to your Java class file
 
-# Output file on desktop
-output_file = os.path.join(desktop_path, "openai_test_cases.txt")
+# Output file in the "evosuite_vs_open_ai" directory
+output_file = os.path.join(output_dir, "openai_test_cases.txt")
 
 generate_test_cases_with_openai(java_class_file, output_file)

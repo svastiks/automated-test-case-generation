@@ -50,11 +50,13 @@ def compare_test_cases(evosuite_file, openai_file, report_file):
 
     print(f"Comparison report written to {report_file}")
 
-
 # Example usage
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-evosuite_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")  # EVOSuite test cases file
-openai_file = os.path.join(desktop_path, "openai_test_cases.txt")  # OpenAI test cases file
-report_file = os.path.join(desktop_path, "comparison_report.md")  # Output report file (.md)
+output_dir = os.path.join(desktop_path, "evosuite_vs_open_ai")
+os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
+
+evosuite_file = os.path.join(output_dir, "evo_suite_test_cases.txt")  # EVOSuite test cases file
+openai_file = os.path.join(output_dir, "openai_test_cases.txt")  # OpenAI test cases file
+report_file = os.path.join(output_dir, "comparison_report.md")  # Output report file (.md)
 
 compare_test_cases(evosuite_file, openai_file, report_file)

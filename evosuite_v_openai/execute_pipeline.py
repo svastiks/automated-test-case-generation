@@ -11,7 +11,7 @@ def run_script(script_name):
         print(f"An unexpected error occurred while running {script_name}: {e}")
 
 def main():
-    scripts = ["part1.py", "part2.py", "part3.py", "part4.py"]
+    scripts = ["evosuite_v_openai/part1.py", "evosuite_v_openai/part2.py", "evosuite_v_openai/part3.py", "evosuite_v_openai/part4.py"]
     for script in scripts:
         run_script(script)
 
