@@ -9,7 +9,7 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
     Args:
         evosuite_file (str): Path to the EVOSuite test cases file.
         openai_file (str): Path to the OpenAI test cases file.
-        report_file (str): Path to the comparison report file.
+        report_file (str): Path to the comparison report file (.md).
         output_java_file (str): Path to the output .java file for improved test cases.
         output_report_md (str): Path to the output .md file for the final report.
     """
@@ -24,7 +24,7 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
     with open(openai_file, "r") as f:
         openai_test_cases = f.read()
 
-    # Read the comparison report
+    # Read the comparison report (Markdown file)
     with open(report_file, "r") as f:
         comparison_report = f.read()
 
@@ -42,7 +42,8 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
     {comparison_report}
     
     Combine the strengths of both sets of test cases, address any missing areas mentioned in the report, 
-    and generate a final set of JUnit test cases in proper Java syntax.
+    and generate a final set of JUnit test cases in proper Java syntax. Do not add '```java' just simply
+    write it to a .java file. If you wanna add any text explaining the code, add it as a comment not as markdown.
     """
 
     # Call the OpenAI API to generate improved test cases
@@ -133,7 +134,7 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
 evosuite_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")  # EVOSuite test cases file
 openai_file = os.path.join(desktop_path, "openai_test_cases.txt")  # OpenAI test cases file
-report_file = os.path.join(desktop_path, "comparison_report.txt")  # Comparison report file
+report_file = os.path.join(desktop_path, "comparison_report.md")  # Comparison report file (.md)
 output_java_file = os.path.join(desktop_path, "Money_ESTest.java")  # Output .java file
 output_report_md = os.path.join(desktop_path, "FinalReport.md")  # Output .md file for the final report
 

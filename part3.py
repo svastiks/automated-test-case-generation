@@ -3,12 +3,12 @@ import os
 
 def compare_test_cases(evosuite_file, openai_file, report_file):
     """
-    Compares test cases from EVOSuite and OpenAI and generates a report.
+    Compares test cases from EVOSuite and OpenAI and generates a report in Markdown format.
     
     Args:
         evosuite_file (str): Path to the EVOSuite test cases file.
         openai_file (str): Path to the OpenAI test cases file.
-        report_file (str): Path to the output report file.
+        report_file (str): Path to the output report file (.md).
     """
     # Initialize the OpenAI client
     client = OpenAI()
@@ -22,7 +22,7 @@ def compare_test_cases(evosuite_file, openai_file, report_file):
 
     # Define the input for the model
     input_text = f"""
-    Compare the following two sets of test cases and generate a detailed report:
+    Compare the following two sets of test cases and generate a detailed report in Markdown format:
     
     EVOSuite Test Cases:
     {evosuite_test_cases}
@@ -31,6 +31,8 @@ def compare_test_cases(evosuite_file, openai_file, report_file):
     {openai_test_cases}
     
     Report the differences, identify missing test cases in EVOSuite, and suggest improvements.
+    Make sure to use 3 code snippets for each approach (OpenAI and EVOSuite).
+    Additionally, use a good amount of emojis to make the report more engaging.
     """
 
     # Call the OpenAI API
@@ -42,7 +44,7 @@ def compare_test_cases(evosuite_file, openai_file, report_file):
     # Extract the report
     report = response.output_text.strip()
 
-    # Write the report to the output file
+    # Write the report to the output Markdown file
     with open(report_file, "w") as f:
         f.write(report)
 
@@ -53,6 +55,6 @@ def compare_test_cases(evosuite_file, openai_file, report_file):
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
 evosuite_file = os.path.join(desktop_path, "evo_suite_test_cases.txt")  # EVOSuite test cases file
 openai_file = os.path.join(desktop_path, "openai_test_cases.txt")  # OpenAI test cases file
-report_file = os.path.join(desktop_path, "comparison_report.txt")  # Output report file
+report_file = os.path.join(desktop_path, "comparison_report.md")  # Output report file (.md)
 
 compare_test_cases(evosuite_file, openai_file, report_file)
