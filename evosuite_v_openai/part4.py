@@ -101,6 +101,8 @@ def generate_improved_test_cases_and_report(evosuite_file, openai_file, report_f
 
     ⚠️ Keep the report informative but not long. Avoid repetition. Prioritize specificity and structure over length.
     
+    Make the title "Final Report (EVOSuite vs OpenAI)"
+
     EVOSuite Test Cases:
     {evosuite_test_cases}
     

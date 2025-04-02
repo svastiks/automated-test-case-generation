@@ -101,6 +101,8 @@ def generate_improved_test_cases_and_report(randoop_file, openai_file, report_fi
 
     ⚠️ Keep the report informative but not long. Avoid repetition. Prioritize specificity and structure over length.
     
+    Make the title "Final Report (Randoop vs OpenAI)"
+
     Randoop Test Cases:
     {randoop_test_cases}
     
